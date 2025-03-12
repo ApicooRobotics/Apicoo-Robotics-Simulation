@@ -21,19 +21,19 @@
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
 
 
-    <site size="0.002" pos="0 0 0.2" name="anchor"/>
+    <!-- <site size="0.002" pos="0 0 0.2" name="anchor"/>
     <body name="object" pos="0 0 0.15">
       <freejoint/>
       <geom type="box" size="0.015 0.015 0.015" rgba=".5 .7 .5 1" friction=".5" priority="1"/>
       <site size="0.002" pos="0.015 0.015 0.015" name="hook"/>
-    </body>
+    </body> -->
   </worldbody>
 
-  <tendon>
+  <!-- <tendon>
     <spatial limited="true" range="0 0.02" width="0.001">
       <site site="hook"/>
       <site site="anchor"/>
     </spatial>
-  </tendon>
+  </tendon> -->
 
 </mujoco>
