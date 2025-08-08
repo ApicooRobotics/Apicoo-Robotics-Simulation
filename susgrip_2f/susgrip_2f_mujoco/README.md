@@ -9,7 +9,7 @@ This package contains a simplified robot description (MJCF) of the
  developed by [Apioo Robotics](https://apicoorobotics.com/). 
 
 <p float="left">
-  <img src="susgrip_2f.png" width="600px">
+  <img src="https://github.com/nghiank97/Apicoo_Robotics_Simulation/blob/nghia-n.k/susgrip_2f/susgrip_2f_mujoco/susgrip_2f.png" width="600px">
 </p>
 
 ### Excute
