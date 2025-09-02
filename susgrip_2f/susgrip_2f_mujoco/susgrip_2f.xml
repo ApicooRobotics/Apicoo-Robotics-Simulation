@@ -1,0 +1,255 @@
+<mujoco model="susgrip_2f">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  
+  <option integrator="implicitfast"/>
+
+  <default>
+    <default class="susgrip_2f">
+      <default class="size1">
+        <general gainprm="400"/>
+      </default>
+
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+    <default class="collision">
+      <geom type="mesh" group="3"/>
+      <default class="pad_box1">
+        <geom mass="0" type="box" pos="0 -0.0026 0.028125" size="0.011 0.004 0.009375" friction="0.7"
+          solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
+      </default>
+      <default class="pad_box2">
+        <geom mass="0" type="box" pos="0 -0.0026 0.009375" size="0.011 0.004 0.009375" friction="0.6"
+          solimp="0.95 0.99 0.001" solref="0.004 1" priority="1"/>
+      </default>
+    </default>
+      <site size="0.001" rgba="0.5 0.5 0.5 0.3" group="4"/>
+    </default>
+    <default class="screw">
+      <geom type="cylinder" size="0.002 0.0075 0.0025" material="black"/>
+    </default>
+  </default>
+
+<!-- ================================================================================ -->
+
+  <asset>
+    <material class="susgrip_2f" name="color_base" rgba="0.423529 0.494118 0.882353 1.0" />
+    <material class="susgrip_2f" name="color_finger" rgba="0.572549 0.72549 0.890196 1.0" />
+    <material class="susgrip_2f" name="color_pad" rgba="1.0 0.768627 0.643137 1.0" />
+    <material class="susgrip_2f" name="color_slider" rgba="0.984314 0.635294 0.815686 1.0" />
+    <material class="susgrip_2f" name="color_link" rgba="0.776471 0.533333 0.921569 1.0" />
+    <material class="susgrip_2f" name="color_A1" rgba="0.627450 0.866666 1 1" />
+    <material class="susgrip_2f" name="color_A2" rgba="0.129411 0.172549 0.407843 1" />
+    <material name="black" rgba="0 0 0 1" />
+
+<!-- ================================================================================ -->
+
+    <mesh file="SUS_2F_Base.STL"/>
+    <mesh file="SUS_2F_ShaftPhi_0.STL"/>
+    <mesh file="SUS_2F_ShaftPhi_1.STL"/>
+    <mesh file="SUS_2F_ShaftPhi_2.STL"/>
+    <mesh file="SUS_2F_ShaftPhi_3.STL"/>
+    <mesh file="SUS_2F_Finger_R.obj"/>
+    <mesh file="SUS_2F_Finger_L.obj"/>
+    <mesh file="SUS_2F_Pad_L.obj"/>
+    <mesh file="SUS_2F_Passive_Link_L.obj"/>
+    <mesh file="SUS_2F_Pad_R.obj"/>
+    <mesh file="SUS_2F_Passive_Link_R.obj"/>
+    <mesh file="SUS_2F_Outer_L.obj"/>
+    <mesh file="SUS_2F_Outer_R.obj"/>
+    <mesh file="SUS_2F_Inner_L.obj"/>
+    <mesh file="SUS_2F_Inner_R.obj"/>
+    <mesh file="SUS_2F_Slider_L.obj"/>
+    <mesh file="SUS_2F_Slider_R.obj"/>
+    <mesh file="SUS_2F_A1.obj"/>
+    <mesh file="SUS_2F_A2.obj"/>
+  </asset>
+
+<!-- ================================================================================ -->
+
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="body_base_2f" pos="0 -1 2"/>
+
+<!-- ================================================================================ -->
+
+    <body name="susgrip_2f" euler="0 0 0">
+      <body name="body_base_2f">
+        <geom mesh="SUS_2F_Base" type="mesh" class="visual" material="color_base" pos="0. 0. 0.06" euler="-1.570796 0 0"/>
+        <geom mesh="SUS_2F_Base" type="mesh" class="collision" material="color_base" pos="0. 0. 0.06" euler="-1.570796 0 0"/>
+
+        <geom mesh="SUS_2F_ShaftPhi_0" type="mesh" class="visual" pos="0.041 0.0125 0.055" material="color_base" euler="1.570796 0 3.141592"/>
+        <geom mesh="SUS_2F_ShaftPhi_1" type="mesh" class="visual" pos="0.041 -0.0125 0.055" material="color_base" euler="1.570796 0 3.141592"/>
+        <geom mesh="SUS_2F_ShaftPhi_2" type="mesh" class="visual" pos="-0.041 0.0125 0.055" material="color_base" euler="1.570796 0 3.141592"/>
+        <geom mesh="SUS_2F_ShaftPhi_3" type="mesh" class="visual" pos="-0.041 -0.0125 0.055" material="color_base" euler="1.570796 0 3.141592"/>
+
+        <geom mesh="SUS_2F_A1" type="mesh" class="visual" pos="0.0184 0.027 0.07" material="color_A1" euler="0 3.141592 3.141592"/>
+        <geom mesh="SUS_2F_A2" type="mesh" class="visual" pos="-0.0184 0.027 0.07" material="color_A2" euler="0 3.141592 3.141592"/>
+        <geom mesh="SUS_2F_A1" type="mesh" class="visual" pos="-0.0184 -0.027 0.07" material="color_A1" euler="0 3.141592 0"/>
+        <geom mesh="SUS_2F_A2" type="mesh" class="visual" pos="0.0184 -0.027 0.07" material="color_A2" euler="0 3.141592 0"/>
+
+        <!-- <geom type="cylinder" size="0.0015 0.065 0." pos="0 0. 0.155" material="black" euler="1.570796 1.570796 0"/> -->
+      </body>
+
+<!-- ================================================================================ -->
+
+      <body name="body_finger_l">
+        <geom name="finger_inner_l_screw" class="screw" pos="-0.04 0. 0.097" euler="1.570796 0 0"/>
+        <geom name="finger_outer_l_screw" class="screw" pos="-0.053 0. 0.097" euler="1.570796 0 0"/>
+        <geom mesh="SUS_2F_Finger_L" type="mesh" class="visual" material="color_finger" pos="0. 0. 0."/>
+        <geom mesh="SUS_2F_Finger_L" type="mesh" class="collision" material="color_finger" pos="0. 0. 0."/>
+        <joint name="finger_outer_l_joint" type="slide" axis="-1 0 0" pos="-0.04 0. 0.097" damping="0.0005"/>
+
+        <body name="body_inner_l">
+          <geom mesh="SUS_2F_Inner_L" type="mesh" class="visual" material="color_link" pos="0. 0. 0."/>
+          <joint name="inner_slider_l_joint" type="hinge" axis="0 1 0" pos="-0.04 0. 0.097" damping="0.0005"/>
+          <body name="body_pad_l">
+            <geom mesh="SUS_2F_Pad_L" type="mesh" class="visual" material="color_pad" pos="-0.04 0.0165 0.097" euler="0 0 -1.570796"/>
+            <joint name="base_pad_l_joint" type="hinge" axis="0 1 0" pos="-0.04 0. 0.07" damping="0.0005"/>
+          </body>
+          <body name="body_pad_link_l">
+            <geom mesh="SUS_2F_Passive_Link_L" type="mesh" class="visual" material="color_pad" pos="-0.04 -0.016 0.097" euler="0 0 1.570796"/>
+            <joint name="base_pad_link_l_joint" type="hinge" axis="0 1 0" pos="-0.04 0. 0.07" damping="0.0005"/>
+          </body>
+        </body>
+
+<!-- ================================================================================ -->
+
+        <body name="body_outer_l">
+          <geom mesh="SUS_2F_Outer_L" type="mesh" class="visual" material="color_link" pos="0. 0. 0."/>
+          <joint name="outer_slider_l_joint" type="hinge" axis="0 1 0" pos="-0.053 0. 0.097" damping="0.0005"/>
+        </body>
+      </body>
+
+<!-- ================================================================================ -->
+
+      <body name="body_side_l">
+        <geom name="slider_inner_l_screw" class="screw" pos="-0.04 0. 0.043" euler="1.570796 0 0"/>
+        <geom name="slider_outer_l_screw" class="screw" pos="-0.053 0. 0.043" euler="1.570796 0 0"/>
+        <geom mesh="SUS_2F_Slider_L" type="mesh" class="visual" material="color_slider" pos="0. 0. 0."/>
+        <joint name="slider_l_joint" type="slide" axis="0 0 1" pos="-0.04 0. 0.043" damping="0.0005"/>
+      </body>
+
+<!-- ================================================================================ -->
+
+      <body name="body_finger_r">
+        <geom name="finger_inner_r_screw" class="screw" pos="0.04 0. 0.097" euler="1.570796 0 0"/>
+        <geom name="finger_outer_r_screw" class="screw" pos="0.053 0. 0.097" euler="1.570796 0 0"/>
+        <geom mesh="SUS_2F_Finger_R" type="mesh" class="visual" pos="0. 0. 0." euler="0 0 3.141592" material="color_finger" />
+        <geom mesh="SUS_2F_Finger_R" type="mesh" class="collision" pos="0. 0. 0." euler="0 0 3.141592" material="color_finger" />
+        <joint name="finger_outer_r_joint" type="slide" axis="-1 0 0" pos="0.04 0. 0.097" damping="0.0005"/>
+
+        <body name="body_inner_r">
+          <geom mesh="SUS_2F_Inner_R" type="mesh" class="visual" material="color_link"/>
+          <joint name="inner_slider_r_joint" type="hinge" axis="0 1 0" pos="0.04 0. 0.097" damping="0.0005"/>
+          <body name="body_pad_r">
+            <geom mesh="SUS_2F_Pad_R" type="mesh" class="visual" material="color_pad" pos="0.04 -0.0165 0.097" euler="0 0 1.570796"/>
+            <joint name="base_pad_r_joint" type="hinge" axis="0 1 0" pos="0.04 0. 0.07" damping="0.0005"/>
+          </body>
+
+          <body name="body_pad_link_r">
+            <geom mesh="SUS_2F_Passive_Link_R" type="mesh" class="visual" material="color_pad" pos="0.04 0.0165 0.097" euler="0 0 -1.570796"/>
+            <joint name="base_pad_link_r_joint" type="hinge" axis="0 1 0" pos="0.04 0. 0.07" damping="0.0005"/>
+          </body>
+        </body>
+
+<!-- ================================================================================ -->
+
+        <body name="body_outer_r">
+          <geom mesh="SUS_2F_Outer_R" type="mesh" class="visual" pos="0. 0. 0.14" euler="3.141592 0 3.141592" material="color_link"/>
+          <joint name="outer_slider_r_joint" type="hinge" axis="0 1 0" pos="0.053 0. 0.097" damping="0.0005"/>
+        </body>
+      </body>
+
+<!-- ================================================================================ -->
+
+      <body name="body_side_r">
+        <geom name="slider_inner_r_screw" class="screw" pos="0.04 0. 0.043" euler="1.570796 0 0"/>
+        <geom name="slider_outer_r_screw" class="screw" pos="0.053 0. 0.043" euler="1.570796 0 0"/>
+        <geom mesh="SUS_2F_Slider_R" type="mesh" class="visual" material="color_slider" pos="0. 0. 0."/>
+        <joint name="slider_r_joint" type="slide" axis="0 0 1" pos="0.04 0. 0.043" damping="0.0005"/>
+      </body>
+    </body>
+<!-- ================================================================================ -->
+  </worldbody>
+<!-- ===========================================================================-->
+  <tendon>
+    <fixed name="finger">
+      <joint joint="finger_outer_l_joint" coef="0.5"/>
+      <joint joint="finger_outer_r_joint" coef="-0.5"/>
+    </fixed>
+    <fixed name="pad">
+      <joint joint="base_pad_link_l_joint" coef="0.5"/>
+      <joint joint="base_pad_link_r_joint" coef="-0.5"/>
+      <joint joint="base_pad_l_joint" coef="0.5"/>
+      <joint joint="base_pad_r_joint" coef="-0.5"/>
+    </fixed>
+  </tendon>
+<!-- ===========================================================================-->
+  <contact>
+    <exclude body1="body_base_2f" body2="body_finger_l"/>
+    <exclude body1="body_base_2f" body2="body_inner_l"/>
+    <exclude body1="body_base_2f" body2="body_outer_l"/>
+    <exclude body1="body_base_2f" body2="body_side_l"/>
+    <exclude body1="body_base_2f" body2="body_pad_l"/>
+    <exclude body1="body_base_2f" body2="body_pad_link_l"/>
+
+    <exclude body1="body_finger_l" body2="body_outer_l"/>
+    <exclude body1="body_finger_l" body2="body_inner_l"/>
+    <exclude body1="body_finger_l" body2="body_pad_l"/>
+    <exclude body1="body_finger_l" body2="body_pad_link_l"/>
+
+    <exclude body1="body_pad_l" body2="body_outer_l"/>
+    <exclude body1="body_pad_l" body2="body_inner_l"/>
+
+    <exclude body1="body_pad_link_l" body2="body_outer_l"/>
+    <exclude body1="body_pad_link_l" body2="body_inner_l"/>
+
+    <exclude body1="body_side_l" body2="body_inner_l"/>
+    <exclude body1="body_side_l" body2="body_outer_l"/>
+    <exclude body1="body_side_l" body2="body_pad_l"/>
+    <exclude body1="body_side_l" body2="body_pad_link_l"/>
+
+    <exclude body1="body_inner_l" body2="body_outer_l"/>
+<!-- ===========================================================================-->
+    <exclude body1="body_base_2f" body2="body_finger_r"/>
+    <exclude body1="body_base_2f" body2="body_inner_r"/>
+    <exclude body1="body_base_2f" body2="body_outer_r"/>
+    <exclude body1="body_base_2f" body2="body_side_r"/>
+    <exclude body1="body_base_2f" body2="body_pad_r"/>
+    <exclude body1="body_base_2f" body2="body_pad_link_r"/>
+
+    <exclude body1="body_finger_r" body2="body_outer_r"/>
+    <exclude body1="body_finger_r" body2="body_inner_r"/>
+    <exclude body1="body_finger_r" body2="body_pad_r"/>
+    <exclude body1="body_finger_r" body2="body_pad_link_r"/>
+
+    <exclude body1="body_pad_r" body2="body_inner_r"/>
+    <exclude body1="body_pad_r" body2="body_side_r"/>
+
+    <exclude body1="body_pad_link_r" body2="body_inner_r"/>
+    <exclude body1="body_pad_link_r" body2="body_side_r"/>
+
+    <exclude body1="body_side_r" body2="body_inner_r"/>
+    <exclude body1="body_side_r" body2="body_outer_r"/>
+    <exclude body1="body_side_r" body2="body_pad_r"/>
+    <exclude body1="body_side_r" body2="body_pad_link_r"/>
+
+    <exclude body1="body_inner_r" body2="body_outer_r"/>
+  </contact>
+<!-- ===========================================================================-->
+  <equality>
+    <connect anchor="-0.04 0. 0.097" body1="body_base_2f" body2="body_pad_l"/>
+    <connect anchor="-0.04 0. 0.097" body1="body_base_2f" body2="body_pad_link_l"/>
+    <connect anchor="-0.04 0. 0.043" body1="body_inner_l" body2="body_side_l"/>
+    <connect anchor="-0.053 0. 0.043" body1="body_outer_l" body2="body_side_l"/>
+
+    <connect anchor="0.04 0. 0.097" body1="body_base_2f" body2="body_pad_r"/>
+    <connect anchor="0.04 0. 0.097" body1="body_base_2f" body2="body_pad_link_r"/>
+    <connect anchor="0.04 0. 0.043" body1="body_inner_r" body2="body_side_r"/>
+    <connect anchor="0.053 0. 0.043" body1="body_outer_r" body2="body_side_r"/>
+  </equality>
+<!-- ===========================================================================-->
+  <actuator>
+    <general name="fingers" tendon="finger" forcerange="-1000 1000" ctrlrange="-0.46 0.46"/>
+  </actuator>
+</mujoco>
